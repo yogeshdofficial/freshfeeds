@@ -1,3 +1,5 @@
+https://freshfeeds.netlify.app
+
 # Astro Starter Kit: Basics
 
 ```sh
