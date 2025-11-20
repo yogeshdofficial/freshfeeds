@@ -1,4 +1,7 @@
 ---
+// Header component: application toolbar containing menu and theme picker.
+// - Uses `themes` from `src/constants/themes` to render the theme selector.
+// - Theme selection is persisted to `localStorage` and applied to `document.documentElement`.
 import { Icon } from "astro-icon/components";
 import { themes } from "../constants/themes";
 ---
@@ -49,7 +52,9 @@ import { themes } from "../constants/themes";
 <script>
   document.addEventListener("DOMContentLoaded", () => {
     // --- Your existing theme setup code ---
-    const radios = document.querySelectorAll('input[name="theme-dropdown"]');
+    const radios = document.querySelectorAll<HTMLInputElement>(
+      'input[name="theme-dropdown"]'
+    );
     const currentTheme = localStorage.getItem("theme");
 
     if (currentTheme) {
@@ -62,9 +67,12 @@ import { themes } from "../constants/themes";
 
     radios.forEach((radio) => {
       radio.addEventListener("change", (e) => {
-        const selectedTheme = e.target.value;
-        localStorage.setItem("theme", selectedTheme);
-        document.documentElement.setAttribute("data-theme", selectedTheme);
+        const target = e.target as HTMLInputElement | null;
+        const selectedTheme = target?.value ?? null;
+        if (selectedTheme) {
+          localStorage.setItem("theme", selectedTheme);
+          document.documentElement.setAttribute("data-theme", selectedTheme);
+        }
       });
     });
   });

@@ -1,7 +1,22 @@
-export function shortTimeAgo(dateStr) {
-  const date = new Date(dateStr); // works for both pubDate and isoDate
+/**
+ * Convert a date string (or Date) into a short relative time string.
+ * Examples: `5m`, `2h`, `3d`, `just now`.
+ *
+ * The function accepts values commonly provided by RSS feeds such as
+ * `pubDate` or `isoDate` strings.
+ *
+ * @param dateStr - Date string or Date object to convert.
+ * @returns Short relative time string.
+ */
+export function shortTimeAgo(dateStr: string | Date): string {
+  const date = typeof dateStr === "string" ? new Date(dateStr) : dateStr;
+
+  if (!(date instanceof Date) || Number.isNaN(date.getTime())) {
+    return "unknown";
+  }
+
   const now = new Date();
-  const seconds = Math.floor((now - date) / 1000);
+  const seconds = Math.floor((now.getTime() - date.getTime()) / 1000);
 
   const units = [
     { label: "y", seconds: 60 * 60 * 24 * 365 },
@@ -12,7 +27,7 @@ export function shortTimeAgo(dateStr) {
     { label: "s", seconds: 1 },
   ];
 
-  for (let unit of units) {
+  for (const unit of units) {
     const value = Math.floor(seconds / unit.seconds);
     if (value >= 1) {
       return `${value}${unit.label}`;

@@ -14,7 +14,11 @@ import Sidebar from "../components/Sidebar.astro";
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
-    <title>Astro Basics</title>
+    <meta
+      name="description"
+      content="FreshFeeds — a lightweight, fast RSS reader built with Astro."
+    />
+    <title>FreshFeeds</title>
   </head>
   <body class="bg-red-300 max-w-pr">
     <!-- <div class="drawer">
@@ -31,10 +35,10 @@ import Sidebar from "../components/Sidebar.astro";
 
       <!-- Main content -->
       <div
-        class="min-w-0 drawer-content max-w-[min(100%,65ch)] mx-auto p-4 sm:p-2 flex flex-col gap-4"
+        class="min-w-0 drawer-content mx-auto p-6 sm:p-8 flex flex-col gap-6 site-container"
       >
         <Header />
-        <main class="">
+        <main>
           <slot />
         </main>
       </div>

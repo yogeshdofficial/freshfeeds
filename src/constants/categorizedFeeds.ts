@@ -1,3 +1,7 @@
+// categorizedFeeds.ts
+// Central registry of RSS/Atom feed URLs grouped by category.
+// Keep this file as a plain data file; the rest of the app imports categories
+// and iterates the feed URLs at runtime.
 export const categorizedFeeds = {
   programming: [
     {

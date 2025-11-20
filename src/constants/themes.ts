@@ -1,3 +1,5 @@
+// Available UI themes. These are used by the Header theme picker and stored
+// in `localStorage` under the key `theme`.
 export const themes = [
   "gruvbox",
   "light",

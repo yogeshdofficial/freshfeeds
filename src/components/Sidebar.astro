@@ -1,4 +1,7 @@
 ---
+// Sidebar component: displays the list of categories.
+// - `categorizedFeeds` provides the available categories and feeds.
+// - `Astro.params.category` can be used to highlight the active category (not currently applied).
 import { categorizedFeeds } from "../constants/categorizedFeeds";
 const { category } = Astro.params;
 ---

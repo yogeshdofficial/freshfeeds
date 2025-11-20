@@ -10,37 +10,74 @@ pnpm create astro@latest -- --template basics
 
 Inside of your Astro project, you'll see the following folders and files:
 
-```text
+````text
 /
 ├── public/
 │   └── favicon.svg
 ├── src
 │   ├── assets
 │   │   └── astro.svg
-│   ├── components
-│   │   └── Welcome.astro
-│   ├── layouts
-│   │   └── Layout.astro
-│   └── pages
-│       └── index.astro
-└── package.json
+# FreshFeeds (rssence)
+
+A lightweight RSS/Atom reader built with Astro. FreshFeeds aggregates feeds by category and presents a simple, fast interface for browsing the latest items from many sources.
+
+## Features
+
+- Category-based collection of RSS/Atom feeds
+- Simple UI components for navigation, feed lists and theme switching
+- Uses `rss-parser` to fetch and parse feeds server-side
+
+## Quickstart
+
+Prerequisites:
+- Node.js (recommended v18+)
+- `pnpm` (project expects pnpm package manager)
+
+Install dependencies:
+
+```bash
+pnpm install
+````
+
+Run the development server:
+
+```bash
+pnpm dev
 ```
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+Build for production:
 
-## 🧞 Commands
+```bash
+pnpm build
+pnpm preview
+```
 
-All commands are run from the root of the project, from a terminal:
+## Project Structure
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `pnpm install`             | Installs dependencies                            |
-| `pnpm dev`             | Starts local dev server at `localhost:4321`      |
-| `pnpm build`           | Build your production site to `./dist/`          |
-| `pnpm preview`         | Preview your build locally, before deploying     |
-| `pnpm astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `pnpm astro -- --help` | Get help using the Astro CLI                     |
+- `src/components` — Astro components (Header, Sidebar, Feed, DomainChooser)
+- `src/constants` — Data like `categorizedFeeds.ts` and available `themes`
+- `src/utils` — Helper utilities (`rss.ts`, `time.ts`)
+- `src/pages` — Astro pages and routing
 
-## 👀 Want to learn more?
+## Development Notes
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+- Feeds are defined in `src/constants/categorizedFeeds.ts`. Add or remove feed URLs there.
+- Feed fetching is handled by `src/utils/rss.ts` which uses `rss-parser`.
+- Short relative times are provided by `src/utils/time.ts`.
+- Theme selection is stored in `localStorage` under the key `theme` and applied to `document.documentElement`.
+
+## Contributing
+
+- Open an issue or submit a pull request.
+- Keep changes focused and include small, testable commits.
+
+## License
+
+This repository does not include a license file. If you maintain the project, add a `LICENSE` to indicate the project's license (e.g. MIT).
+
+---
+
+If you'd like, I can:
+
+- Add a `LICENSE` (MIT) and update `package.json`.
+- Run a formatting pass (Prettier/ESLint) and fix remaining TypeScript warnings.

@@ -61,3 +61,48 @@
     --font-sans: var(--font-roboto);
     --font-oswald: var(--font-oswald);
 }
+
+/* Site helpers for a cleaner, professional look */
+:root {
+  --site-max-width: 80ch;
+}
+
+/* Centered site container used by Layout */
+.site-container {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: var(--site-max-width);
+}
+
+/* Card style used across the site */
+.card {
+  border-radius: var(--radius-box);
+  padding: 1rem;
+  background: var(--color-base-100);
+  border: var(--border) solid rgba(255,255,255,0.03);
+  transition: transform 160ms ease, box-shadow 160ms ease;
+}
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 28px rgba(0,0,0,0.35);
+}
+
+/* Prominent hero styles */
+.hero {
+  padding: 2rem 1rem;
+  border-radius: calc(var(--radius-box) * 1.2);
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
+  border: 1px solid rgba(255,255,255,0.03);
+}
+
+/* Category card tweaks */
+.category-card {
+  display: block;
+  text-decoration: none;
+}
+.category-card .title {
+  font-weight: 600;
+}
+.small-muted {
+  color: rgba(235,219,178,0.7);
+}

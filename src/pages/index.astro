@@ -1,11 +1,58 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
+import Layout from "../layouts/Layout.astro";
+import { categorizedFeeds } from "../constants/categorizedFeeds";
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+// Front page: a simple index that links to available categories.
+// Each card shows the category name, number of feeds, and a few sample domains.
 ---
 
 <Layout>
-	<Welcome />
+  <header class="prose mx-auto text-center">
+    <h1 class="text-4xl font-oswald">FreshFeeds</h1>
+    <p class="text-base max-w-prose mx-auto">
+      A lightweight RSS reader aggregating feeds by category. Click any category
+      to browse its latest items.
+    </p>
+  </header>
+  <section class="hero card">
+    <div class="prose mx-auto text-center">
+      <h1 class="text-4xl font-oswald">FreshFeeds</h1>
+      <p class="text-base max-w-prose mx-auto">
+        A lightweight RSS reader aggregating feeds by category. Click any
+        category to browse its latest items.
+      </p>
+    </div>
+  </section>
+
+  <section class="mt-6">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      {
+        Object.keys(categorizedFeeds).map((category: string) => {
+          const feeds =
+            categorizedFeeds[category as keyof typeof categorizedFeeds];
+          const sample = feeds
+            .slice(0, 3)
+            .map((f) => f.domain)
+            .join(", ");
+          return (
+            <a href={`/${category}`} class="category-card card">
+              <div class="flex items-center justify-between">
+                <div>
+                  <h3 class="title text-lg capitalize">
+                    {category.replace(/_/g, " ")}
+                  </h3>
+                  <p class="small-muted text-sm">{feeds.length} feeds</p>
+                </div>
+                <div class="text-sm small-muted">↗</div>
+              </div>
+              <p class="mt-2 text-sm text-base-content opacity-80">{sample}</p>
+            </a>
+          );
+        })
+      }
+    </div>
+  </section>
 </Layout>
+
+); }) }
+

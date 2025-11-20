@@ -1,13 +1,24 @@
 ---
+// DomainChooser: horizontal list of domain anchors used as quick navigation.
+// Props:
+// - `domains`: array of domain strings (used for anchor links to feed sections).
 const { domains } = Astro.props;
 ---
 
-<ul class="flex gap-2 overflow-x-scroll scrollbar-thin max-w-full">
+<ul class="flex gap-2 overflow-x-auto scrollbar-thin max-w-full">
   {
-    domains.map((domain) => {
+    domains.map((domain: string) => {
       return (
-        <li class="rounded-sm p-0.5 px-1 border">
-          <a href={"#" + domain}>{domain}</a>
+        // `flex-shrink-0` keeps the item from compressing and
+        // `whitespace-nowrap` prevents long domain names from breaking.
+        <li class="rounded-sm p-0.5 px-1 border flex-shrink-0">
+          <a
+            class="whitespace-nowrap inline-block"
+            title={domain}
+            href={"#" + domain}
+          >
+            {domain}
+          </a>
         </li>
       );
     })
