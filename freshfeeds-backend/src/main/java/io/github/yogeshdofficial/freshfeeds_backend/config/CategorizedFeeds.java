@@ -1,0 +1,623 @@
+package io.github.yogeshdofficial.freshfeeds_backend.config;
+
+import io.github.yogeshdofficial.freshfeeds_backend.model.FeedSource;
+
+import java.util.Collections;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+
+public final class CategorizedFeeds {
+
+    private static final Map<String, List<FeedSource>> ALL = build();
+
+    private CategorizedFeeds() {
+    }
+
+    public static Map<String, List<FeedSource>> all() {
+        return ALL;
+    }
+
+    private static FeedSource feed(String url, String domain) {
+        return new FeedSource(url, domain);
+    }
+
+    private static Map<String, List<FeedSource>> build() {
+        Map<String, List<FeedSource>> map = new LinkedHashMap<>();
+        map.put("programming", List.of(
+            feed("https://www.reddit.com/r/programming/.rss", "reddit.com"),
+            feed("https://github.blog/feed/", "github.blog"),
+            feed("http://feeds.feedburner.com/GDBcode", "developers.googleblog.com"),
+            feed("https://stackoverflow.blog/feed/", "stackoverflow.blog"),
+            feed("https://feeds.simplecast.com/XA_851k3", "stackoverflow.blog"),
+            feed("https://engineering.fb.com/feed/", "engineering.fb.com"),
+            feed("https://netflixtechblog.com/feed", "netflixtechblog.com"),
+            feed("https://engineering.linkedin.com/blog.rss.html", "engineering.linkedin.com"),
+            feed("https://medium.com/feed/airbnb-engineering", "medium.com"),
+            feed("https://labs.spotify.com/feed/", "engineering.atspotify.com"),
+            feed("https://slack.engineering/feed", "slack.engineering"),
+            feed("https://instagram-engineering.com/feed/", "instagram-engineering.com"),
+            feed("https://blog.twitter.com/engineering/en_us/blog.rss", "blog.twitter.com"),
+            feed("https://developers.soundcloud.com/blog/blog.rss", "developers.soundcloud.com"),
+            feed("https://about.gitlab.com/atom.xml", "about.gitlab.com"),
+            feed("https://blog.jetbrains.com/feed", "blog.jetbrains.com"),
+            feed("https://feed.infoq.com", "infoq.com"),
+            feed("https://martinfowler.com/feed/atom", "martinfowler.com"),
+            feed("https://feeds.feedburner.com/codinghorror", "blog.codinghorror.com"),
+            feed("https://www.joelonsoftware.com/feed/", "joelonsoftware.com"),
+            feed("http://feeds.hanselman.com/ScottHanselman", "hanselman.com"),
+            feed("https://overreacted.io/rss.xml", "overreacted.io"),
+            feed("https://medium.com/feed/better-programming", "betterprogramming.pub"),
+            feed("https://medium.com/feed/hackernoon", "medium.com"),
+            feed("https://codeascraft.com/feed/atom/", "codeascraft.com"),
+            feed("https://m.signalvnoise.com/feed/", "m.signalvnoise.com"),
+            feed("http://feeds.feedburner.com/se-radio", "se-radio.net"),
+            feed("https://softwareengineeringdaily.com/category/podcast/feed", "softwareengineeringdaily.com"),
+            feed("https://feeds.simplecast.com/gvtxulf", "hanselminutes.com"),
+            feed("https://feeds.simplecast.com/dLRotFGk", "developertea.com"),
+            feed("https://feeds.twit.tv/floss.xml", "twit.tv"),
+            feed("https://stackabuse.com/rss/", "stackabuse.com"),
+            feed("https://buffer.com/resources/overflow/rss/", "buffer.com"),
+            feed("https://engineering.prezi.com/feed", "engineering.prezi.com"),
+            feed("https://blog.jooq.org/feed", "blog.jooq.org"),
+            feed("http://feeds.codenewbie.org/cnpodcast.xml", "codernewbie.org"),
+            feed("https://completedeveloperpodcast.com/feed/podcast/", "completedeveloperpodcast.com"),
+            feed("http://feeds.feedburner.com/ProgrammingThrowdown", "programmingthrowdown.com"),
+            feed("https://feeds.fireside.fm/sdt/rss", "softwaredefinedtalk.com"),
+            feed("https://thewomenintechshow.com/category/podcast/feed/", "thewomenintechshow.com"),
+            feed("https://cynicaldeveloper.com/feed/podcast", "cynical.dev"),
+            feed("https://feeds.transistor.fm/productivity-in-tech-podcast", "productivityintech.com"),
+            feed("https://feeds.fireside.fm/standup/rss", "standup.fm"),
+            feed("http://therabbithole.libsyn.com/rss", "therabbithole.libsyn.com"),
+            feed("https://robertheaton.com/feed.xml", "robertheaton.com"),
+            feed("http://scripting.com/ss.xml", "scripting.com"),
+            feed("https://www.thecrazyprogrammer.com/category/programming/feed", "thecrazyprogrammer.com"),
+            feed("https://www.thirtythreeforty.net/posts/index.xml", "thirtythreeforty.net"),
+            feed("http://6figuredev.com/feed/rss/", "6figuredev.com")
+        ));
+        map.put("android", List.of(
+            feed("https://blog.google/products/android/rss", "blog.google"),
+            feed("https://www.reddit.com/r/android/.rss", "reddit.com"),
+            feed("https://www.youtube.com/feeds/videos.xml?user=AndroidAuthority", "youtube.com"),
+            feed("http://feeds.feedburner.com/AndroidPolice", "androidpolice.com"),
+            feed("http://feeds.androidcentral.com/androidcentral", "androidcentral.com"),
+            feed("http://feeds.feedburner.com/AndroidCentralPodcast", "androidcentral.com"),
+            feed("https://www.androidauthority.com/feed", "androidauthority.com"),
+            feed("https://androidauthority.libsyn.com/rss", "androidauthority.com"),
+            feed("https://www.droid-life.com/feed", "droid-life.com"),
+            feed("https://data.xda-developers.com/portal-feed", "xda-developers.com"),
+            feed("https://www.gsmarena.com/rss-news-reviews.php3", "gsmarena.com"),
+            feed("https://androidcommunity.com/feed/", "androidcommunity.com"),
+            feed("http://feeds2.feedburner.com/AndroidPhoneFans", "phandroid.com"),
+            feed("https://feeds.twit.tv/aaa.xml", "twit.tv"),
+            feed("https://www.androidguys.com/feed", "androidguys.com"),
+            feed("http://feeds.feedburner.com/AndroidNewsGoogleAndroidForums", "talkandroid.com"),
+            feed("https://www.cultofandroid.com/feed", "cultofandroid.com"),
+            feed("https://www.cyanogenmods.org/feed", "cyanogenmods.org")
+        ));
+        map.put("android_development", List.of(
+            feed("https://www.youtube.com/feeds/videos.xml?user=androiddevelopers", "youtube.com"),
+            feed("https://medium.com/feed/androiddevelopers", "medium.com"),
+            feed("http://feeds.feedburner.com/blogspot/hsDu", "android-developers.googleblog.com"),
+            feed("https://reddit.com/r/androiddev.rss", "reddit.com"),
+            feed("https://medium.com/feed/airbnb-engineering/tagged/android", "medium.com"),
+            feed("https://proandroiddev.com/feed", "proandroiddev.com"),
+            feed("https://instagram-engineering.com/feed/tagged/android", "instagram-engineering.com"),
+            feed("https://medium.com/feed/mindorks/tagged/android", "medium.com"),
+            feed("https://blog.jetbrains.com/blog/feed", "blog.jetbrains.com"),
+            feed("https://feeds.feedburner.com/Android_Arsenal", "android-arsenal.com"),
+            feed("https://jakewharton.com/atom.xml", "jakewharton.com"),
+            feed("http://feeds.feedburner.com/StylingAndroid", "blog.stylingandroid.com"),
+            feed("https://feeds.simplecast.com/LpAGSLnY", "fragmentedpodcast.com"),
+            feed("https://feeds.soundcloud.com/users/soundcloud:users:280353173/sounds.rss", "talkingkotlin.com"),
+            feed("https://blog.kotlin-academy.com/feed", "blog.kotlin-academy.com"),
+            feed("https://www.youtube.com/feeds/videos.xml?playlist_id=PLQ176FUIylUa6SChjajjVc-LMzxWiz6dy", "youtube.com"),
+            feed("https://www.youtube.com/feeds/videos.xml?channel_id=UCSLXy31j2Z0sdDeeAX5JpPw", "youtube.com"),
+            feed("https://www.youtube.com/feeds/videos.xml?channel_id=UCKubKoe1CBw_-n_GXetEQbg", "youtube.com"),
+            feed("https://blog.danlew.net/rss/", "blog.danlew.net"),
+            feed("https://www.zacsweers.dev/rss/", "zacsweers.dev"),
+            feed("https://zarah.dev/feed.xml", "zarah.dev"),
+            feed("https://joebirch.co/feed", "joebirch.co"),
+            feed("https://publicobject.com/rss/", "publicobject.com"),
+            feed("https://saket.me/feed/", "saket.me"),
+            feed("https://zsmb.co/index.xml", "zsmb.co"),
+            feed("https://okkotlin.com/rss.xml", "okkotlin.com"),
+            feed("https://handstandsam.com/feed/", "handstandsam.com"),
+            feed("https://goobar.io/feed", "goobar.io"),
+            feed("https://chrynan.codes/rss/", "chrynan.codes"),
+            feed("https://buffer.com/resources/android/rss/", "buffer.com"),
+            feed("http://feeds.feedburner.com/blogspot/androiddevelopersbackstage", "androidbackstage.blogspot.com"),
+            feed("https://us2.campaign-archive.com/feed?u=887caf4f48db76fd91e20a06d&id=4eb677ad19", "us2.campaign-archive.com")
+        ));
+        map.put("apple", List.of(
+            feed("https://www.apple.com/newsroom/rss-feed.rss", "apple.com"),
+            feed("https://www.youtube.com/feeds/videos.xml?user=Apple", "youtube.com"),
+            feed("https://www.reddit.com/r/apple/.rss", "reddit.com"),
+            feed("https://www.reddit.com/r/iphone/.rss", "reddit.com"),
+            feed("https://9to5mac.com/feed", "9to5mac.com"),
+            feed("http://feeds.macrumors.com/MacRumors-Mac", "macrumors.com"),
+            feed("https://www.youtube.com/feeds/videos.xml?user=macrumors", "youtube.com"),
+            feed("https://appleinsider.com/rss/news/", "appleinsider.com"),
+            feed("https://www.macworld.com/index.rss", "macworld.com"),
+            feed("http://feeds.feedburner.com/TheiPhoneBlog", "imore.com"),
+            feed("https://www.macstories.net/feed", "macstories.net"),
+            feed("https://daringfireball.net/feeds/main", "daringfireball.net"),
+            feed("https://marco.org/rss", "marco.org"),
+            feed("https://www.cultofmac.com/feed", "cultofmac.com"),
+            feed("https://www.loopinsight.com/feed", "loopinsight.com"),
+            feed("http://feeds.feedburner.com/osxdaily", "osxdaily.com")
+        ));
+        map.put("architecture", List.of(
+            feed("https://www.reddit.com/r/architecture/.rss", "reddit.com"),
+            feed("http://feeds.feedburner.com/Archdaily", "archdaily.com"),
+            feed("https://www.dezeen.com/architecture/feed/", "dezeen.com"),
+            feed("https://www.architecturaldigest.com/feed/rss", "architecturaldigest.com"),
+            feed("https://archinect.com/feed/1/news", "archinect.com"),
+            feed("https://architizer.wpengine.com/feed/", "architizer.com"),
+            feed("https://www.designboom.com/architecture/feed/", "designboom.com"),
+            feed("https://archpaper.com/feed", "archpaper.com"),
+            feed("https://inhabitat.com/architecture/feed/", "inhabitat.com"),
+            feed("https://www.contemporist.com/feed/", "contemporist.com"),
+            feed("https://design-milk.com/category/architecture/feed/", "design-milk.com"),
+            feed("https://www.youtube.com/feeds/videos.xml4", "youtube.com"),
+            feed("https://www.youtube.com/feeds/videos.xml5", "youtube.com"),
+            feed("http://feeds.feedburner.com/archidose", "archidose.blogspot.com")
+        ));
+        map.put("beauty", List.of(
+            feed("https://www.elle.com/rss/beauty.xml/", "elle.com"),
+            feed("https://www.popsugar.com/beauty/feed", "popsugar.com"),
+            feed("https://www.refinery29.com/beauty/rss.xml", "refinery29.com"),
+            feed("https://fashionista.com/rss/excerpt/beauty", "fashionista.com"),
+            feed("https://feeds.feedburner.com/intothegloss/oqoU", "intothegloss.com"),
+            feed("https://www.fashionlady.in/category/beauty-tips/feed", "fashionlady.in"),
+            feed("https://www.yesstyle.com/blog/category/the-beauty-blog/feed/", "yesstyle.com"),
+            feed("https://thebeautylookbook.com/feed", "thebeautylookbook.com"),
+            feed("https://thebeautybrains.com/blog/feed/", "thebeautybrains.com"),
+            feed("https://www.wearedore.com/feed", "wearedore.com"),
+            feed("http://feeds.feedburner.com/frmheadtotoe", "frmheadtotoe.com")
+        ));
+        map.put("books", List.of(
+            feed("https://reddit.com/r/books/.rss", "reddit.com"),
+            feed("https://bookriot.com/feed/", "bookriot.com"),
+            feed("https://www.kirkusreviews.com/feeds/rss/", "kirkusreviews.com"),
+            feed("https://www.newinbooks.com/feed/", "newinbooks.com"),
+            feed("https://ayearofreadingtheworld.com/feed/", "ayearofreadingtheworld.com"),
+            feed("https://aestasbookblog.com/feed/", "aestasbookblog.com"),
+            feed("https://wokeread.home.blog/feed/", "wokeread.home.blog")
+        ));
+        map.put("business_economy", List.of(
+            feed("https://www.youtube.com/feeds/videos.xml?user=Bloomberg", "youtube.com"),
+            feed("https://www.cnbc.com/id/100003114/device/rss/rss.html", "cnbc.com"),
+            feed("https://www.forbes.com/business/feed/", "forbes.com"),
+            feed("https://fortune.com/feed", "fortune.com"),
+            feed("https://finance.yahoo.com/news/rss/index", "finance.yahoo.com"),
+            feed("https://www.youtube.com/feeds/videos.xml?user=businessinsider", "youtube.com"),
+            feed("https://feeds.npr.org/510313/podcast.xml", "npr.org"),
+            feed("http://feeds.harvardbusiness.org/harvardbusiness/ideacast", "hbr.org"),
+            feed("https://economictimes.indiatimes.com/rssfeedsdefault.cms", "economictimes.indiatimes.com"),
+            feed("https://www.business-standard.com/rss/home_page_top_stories.rss", "business-standard.com"),
+            feed("https://seekingalpha.com/market_currents.xml", "seekingalpha.com"),
+            feed("https://www.investing.com/rss/news.rss", "investing.com"),
+            feed("https://tim.blog/feed/", "tim.blog"),
+            feed("https://feeds.feedburner.com/Mixergy-main-podcast", "mixergy.com"),
+            feed("http://thegrowthshow.hubspot.libsynpro.com/", "hubspot.com"),
+            feed("https://ducttape.libsyn.com/rss", "ducttapemarketing.com")
+        ));
+        map.put("cars", List.of(
+            feed("https://www.reddit.com/r/formula1/.rss", "reddit.com"),
+            feed("https://www.caranddriver.com/rss/all.xml", "caranddriver.com"),
+            feed("http://jalopnik.com/rss", "jalopnik.com"),
+            feed("https://www.autoblog.com/rss.xml", "autoblog.com"),
+            feed("https://www.autocar.co.uk/rss", "autocar.co.uk"),
+            feed("https://www.autocarindia.com/RSS.ashx?type=News", "autocarindia.com"),
+            feed("https://www.autocarindia.com/RSS.ashx?type=all_cars", "autocarindia.com"),
+            feed("https://www.autocarindia.com/RSS.ashx?type=all_bikes", "autocarindia.com"),
+            feed("https://www.carscoops.com/feed/", "carscoops.com"),
+            feed("http://feeds.feedburner.com/speedhunters", "speedhunters.com"),
+            feed("https://www.thetruthaboutcars.com/feed/", "thetruthaboutcars.com"),
+            feed("http://feeds.feedburner.com/autonews/AutomakerNews", "autonews.com"),
+            feed("http://feeds.feedburner.com/autonews/EditorsPicks", "autonews.com"),
+            feed("https://bringatrailer.com/feed/", "bringatrailer.com"),
+            feed("https://petrolicious.com/feed", "petrolicious.com"),
+            feed("https://www.carbodydesign.com/feed/", "carbodydesign.com"),
+            feed("https://feeds.feedburner.com/BmwBlog", "bmwblog.com"),
+            feed("https://www.bikeexif.com/feed", "bikeexif.com")
+        ));
+        map.put("cricket", List.of(
+            feed("http://feeds.bbci.co.uk/sport/cricket/rss.xml", "bbc.co.uk"),
+            feed("https://www.reddit.com/r/Cricket/.rss", "reddit.com"),
+            feed("http://www.espncricinfo.com/rss/content/story/feeds.xml", "espncricinfo.com"),
+            feed("https://www.theguardian.com/sport/cricket/rss", "theguardian.com"),
+            feed("https://feeds.megaphone.fm/ESP9247240951", "espn.com"),
+            feed("http://feeds.feedburner.com/ndtv-cricket", "ndtv.com"),
+            feed("http://www.wisden.com/feed", "wisden.com"),
+            feed("http://feeds.soundcloud.com/users/soundcloud:users:341034518/sounds.rss", "wisden.com"),
+            feed("https://www.theroar.com.au/cricket/feed/", "theroar.com.au"),
+            feed("http://rss.acast.com/theanalystinsidecricket", "theanalyst.net"),
+            feed("https://rss.whooshkaa.com/rss/podcast/1308", "gradecricketer.club"),
+            feed("http://podcasts.files.bbci.co.uk/p02gsmh9.rss", "bbc.co.uk"),
+            feed("http://podcasts.files.bbci.co.uk/p02pcb4w.rss", "bbc.co.uk"),
+            feed("http://podcasts.files.bbci.co.uk/p0ms21r7.rss", "bbc.co.uk"),
+            feed("https://rss.acast.com/cricket-unfiltered", "piccolopodcasts.com.au"),
+            feed("http://feeds.feedburner.com/cantbowlcantthrow", "player.whooshkaa.com"),
+            feed("https://www.spreaker.com/show/338734/episodes/feed", "spreaker.com"),
+            feed("https://www.youtube.com/feeds/videos.xml?playlist_id=PLQ176FUIyIUa6SChjajjVc-LMzxWiz6dy0", "youtube.com"),
+            feed("https://www.youtube.com/feeds/videos.xml?playlist_id=PLQ176FUIyIUa6SChjajjVc-LMzxWiz6dy1", "youtube.com"),
+            feed("https://www.youtube.com/feeds/videos.xml?playlist_id=PLQ176FUIyIUa6SChjajjVc-LMzxWiz6dy2", "youtube.com"),
+            feed("https://www.youtube.com/feeds/videos.xml?playlist_id=PLQ176FUIyIUa6SChjajjVc-LMzxWiz6dy3", "youtube.com"),
+            feed("https://www.youtube.com/feeds/videos.xml?playlist_id=PLQ176FUIyIUa6SChjajjVc-LMzxWiz6dy4", "youtube.com")
+        ));
+        map.put("interior_design", List.of(
+            feed("https://www.reddit.com/r/InteriorDesign/.rss", "reddit.com"),
+            feed("https://www.apartmenttherapy.com/design.rss", "apartmenttherapy.com"),
+            feed("https://www.dezeen.com/interiors/feed/", "dezeen.com"),
+            feed("https://www.designboom.com/design/feed", "designboom.com"),
+            feed("https://design-milk.com/category/interior-design/feed/", "design-milk.com"),
+            feed("https://www.interiordesign.net/rss/", "interiordesign.net"),
+            feed("http://feeds.feedburner.com/core77/blog", "core77.com"),
+            feed("https://inhabitat.com/design/feed/", "inhabitat.com"),
+            feed("https://www.idealhome.co.uk/feed", "idealhome.co.uk"),
+            feed("http://feeds.feedburner.com/yankodesign", "yankodesign.com"),
+            feed("https://www.yatzer.com/rss.xml", "yatzer.com"),
+            feed("http://feeds.feedburner.com/fubiz", "fubiz.net"),
+            feed("https://thedesignfiles.net/feed/", "thedesignfiles.net"),
+            feed("http://www.home-designing.com/feed", "home-designing.com"),
+            feed("https://www.trendir.com/feed/", "trendir.com"),
+            feed("https://www.younghouselove.com/feed/", "younghouselove.com"),
+            feed("https://theinspiredroom.net/feed/", "theinspiredroom.net"),
+            feed("https://www.decoist.com/feed/", "decoist.com"),
+            feed("https://www.stgirlbylbay.com/feed/", "stgirlbylbay.com"),
+            feed("https://www.lizmarieblog.com/feed/", "lizmarieblog.com"),
+            feed("https://inmyownstyle.com/feed/", "inmyownstyle.com"),
+            feed("http://feeds.feedburner.com/blogspot/zBZ", "thriftydecorchick.com"),
+            feed("https://www.decor8blog.com/blog/formal-rss", "decor8blog.com"),
+            feed("http://www.betterlivingthroughdesign.com/feed/", "betterlivingthroughdesign.com")
+        ));
+        map.put("diy", List.of(
+            feed("https://hackaday.com/blog/feed/", "hackaday.com"),
+            feed("https://www.howtogeek.com/feed/", "howtogeek.com"),
+            feed("https://www.makeuseof.com/feed/", "makeuseof.com"),
+            feed("https://www.wonderhowto.com/rss.xml", "wonderhowto.com"),
+            feed("https://www.apartmenttherapy.com/projects.rss", "apartmenttherapy.com"),
+            feed("https://blog.etsy.com/en/feed/", "blog.etsy.com"),
+            feed("https://www.ikeahackers.net/feed", "ikeahackers.net"),
+            feed("https://abeautifulmess.com/feed", "abeautifulmess.com"),
+            feed("https://centsationalstyle.com/feed/", "centsationalstyle.com"),
+            feed("https://www.diyncrafts.com/feed", "diyncrafts.com"),
+            feed("http://ohhappyday.com/feed/", "ohhappyday.com")
+        ));
+        map.put("fashion", List.of(
+            feed("https://www.elle.com/rss/fashion.xml", "elle.com"),
+            feed("https://rss.nytimes.com/services/xml/rss/nyt/FashionandStyle.xml", "nytimes.com"),
+            feed("https://www.theguardian.com/fashion/rss", "theguardian.com"),
+            feed("https://www.popsugar.com/fashion/feed", "popsugar.com"),
+            feed("https://www.refinery29.com/fashion/rss", "refinery29.com"),
+            feed("https://fashionista.com/rss/excerpt/", "fashionista.com"),
+            feed("https://www.whowhatwear.com/rss", "whowhatwear.com"),
+            feed("https://www.fashionlady.in/category/fashion/feed", "fashionlady.in"),
+            feed("https://www.fashionbeans.com/rss-feed/?category=fashion", "fashionbeans.com"),
+            feed("https://www.yesstyle.com/blog/category/trend-and-style/feed/", "yesstyle.com")
+        ));
+        map.put("food", List.of(
+            feed("https://rss.nytimes.com/services/xml/rss/nyt/DiningandWine.xml", "nytimes.com"),
+            feed("http://feeds.feedburner.com/seriouseats/recipes", "seriouseats.com"),
+            feed("https://www.thekitchn.com/main.rss", "thekitchn.com"),
+            feed("http://feeds.feedburner.com/food52/TheAandMBlog", "food52.com"),
+            feed("http://feeds.feedburner.com/smittenkitchen", "smittenkitchen.com"),
+            feed("https://www.101cookbooks.com/feed", "101cookbooks.com"),
+            feed("https://blog.williams-sonoma.com/feed/", "blog.williams-sonoma.com"),
+            feed("https://www.skinnytaste.com/feed/", "skinnytaste.com"),
+            feed("https://ohsheglows.com/feed/", "ohsheglows.com"),
+            feed("https://www.howsweeteats.com/feed/", "howsweeteats.com"),
+            feed("http://joythebaker.com/feed/", "joythebaker.com"),
+            feed("https://www.davidlebovitz.com/feed/", "davidlebovitz.com"),
+            feed("https://greenkitchenstories.com/feed/", "greenkitchenstories.com"),
+            feed("https://www.loveandoliveoil.com/feed", "loveandoliveoil.com"),
+            feed("https://www.sproutedkitchen.com/home?format=rss", "sproutedkitchen.com"),
+            feed("http://www.shutterbean.com/feed/", "shutterbean.com"),
+            feed("https://cnz.to/feed/", "cnz.to"),
+            feed("www.youtube.com/feeds/videos", "youtube.com"),
+            feed("www.youtube.com/feeds/Videos", "youtube.com"),
+            feed("https://www.youtube.com/feeds/videos.xml?playlist_id=PLQ176FUIyIUa6SChjajjVc-LMzxWiz6dy7", "youtube.com"),
+            feed("https://www.youtube.com/feeds/videos.xml?playlist_id=PLQ176FUIyIUa6SChjajjVc-LMzxWiz6dy8", "youtube.com")
+        ));
+        map.put("football", List.of(
+            feed("https://www.reddit.com/r/football/.rss?format=xml", "reddit.com"),
+            feed("https://www.reddit.com/r/Championship/.rss?format=xml", "reddit.com"),
+            feed("https://www.goal.com/feeds/en/news", "goal.com"),
+            feed("https://www.skysports.com/football/rss/home", "skysports.com"),
+            feed("https://www.football365.com/feed", "football365.com")
+        ));
+        map.put("funny", List.of(
+            feed("https://www.theonion.com/rss", "theonion.com"),
+            feed("http://feeds.feedburner.com/oatmealfeed", "theoatmeal.com"),
+            feed("http://feeds.feedburner.com/CrackedRSS", "cracked.com"),
+            feed("https://www.smbc-comics.com/comic/rss", "smbc-comics.com"),
+            feed("https://www.penny-arcade.com/feed", "penny-arcade.com"),
+            feed("http://feeds.feedburner.com/Explosm", "explosm.net"),
+            feed("http://syndication.thedailywtf.com/TheDailyWtf", "thedailywtf.com"),
+            feed("http://phdcomics.com/gradfeed.php", "phdcomics.com"),
+            feed("http://feeds.feedburner.com/icanhascheezburger", "icanhascheezburger.com"),
+            feed("http://feeds.feedburner.com/failblog", "failblog.cheezburger.com"),
+            feed("https://thebloggess.com/feed/", "thebloggess.com"),
+            feed("https://postsecret.com/feed/?alt=rss", "postsecret.com"),
+            feed("https://www.awesomelyluvvie.com/feed", "awesomelyluvvie.com")
+        ));
+        map.put("gaming", List.of(
+            feed("https://www.reddit.com/r/gaming/.rss", "reddit.com"),
+            feed("http://feeds.ign.com/ign/all", "ign.com"),
+            feed("https://www.gamespot.com/feeds/mashup/", "gamespot.com"),
+            feed("https://kotaku.com/rss", "kotaku.com"),
+            feed("https://www.polygon.com/rss/index.xml", "polygon.com"),
+            feed("http://feeds.feedburner.com/RockPaperShotgun", "rockpapershotgun.com"),
+            feed("https://www.eurogamer.net/?format=rss", "eurogamer.net"),
+            feed("https://store.steampowered.com/feeds/news.xml", "steampowered.com"),
+            feed("http://feeds.feedburner.com/psblog", "blog.playstation.com"),
+            feed("https://majornelson.com/feed/", "majornelson.com"),
+            feed("http://feeds.feedburner.com/GamasutraNews", "gamasutra.com"),
+            feed("https://www.escapistmagazine.com/v2/feed/", "escapistmagazine.com"),
+            feed("https://indiegamesplus.com/feed", "indiegamesplus.com"),
+            feed("https://toucharcade.com/community/forums/index.rss", "toucharcade.com"),
+            feed("http://feeds.feedburner.com/TheAncientGamingNoob", "tagn.wordpress.com"),
+            feed("https://www.makeupandbeautyblog.com/feed/", "makeupandbeautyblog.com")
+        ));
+        map.put("history", List.of(
+            feed("https://feeds.npr.org/510333/podcast.xml", "npr.org"),
+            feed("http://feeds.feedburner.com/dancarlin/historypodcast", "dancarlin.com"),
+            feed("https://feeds.megaphone.fm/revisionisthistory", "revisionisthistory.com"),
+            feed("https://feeds.megaphone.fm/lore", "lorepodcast.com"),
+            feed("https://feeds.megaphone.fm/VMPR7068253588", "youmustrememberthispodcast.com"),
+            feed("https://americanhistory.si.edu/blog/feed", "americanhistory.si.edu"),
+            feed("http://www.historynet.com/feed", "historynet.com"),
+            feed("https://www.historyinnowmagazine.com/blog/?format=RSS", "historyinnowmagazine.com"),
+            feed("https://www.thehistoryreader.com/feed/", "thehistoryreader.com"),
+            feed("http://feeds.thememorypalace.us/thememorypalace", "thememorypalace.us"),
+            feed("https://feeds.megaphone.fm/ESP5780452710", "megaphone.fm")
+        ));
+        map.put("ios_development", List.of(
+            feed("https://developer.apple.com/news/rss/news.rss", "developer.apple.com"),
+            feed("https://www.swiftbysundell.com/feed.rss", "swiftbysundell.com"),
+            feed("https://swiftbysundell.com/feed.rss", "swiftbysundell.com"),
+            feed("https://swiftrocks.com/rss.xml", "swiftrocks.com"),
+            feed("https://useyourloaf.com/blog/rss.xml", "useyourloaf.com"),
+            feed("https://olebegemann.com/blog/atom.xml", "olebegemann.com"),
+            feed("https://inessential.com/xml/rss.xml", "inessential.com"),
+            feed("https://jakewharton.com/atom.xml", "jakewharton.com"),
+            feed("https://www.relay.fm/radar/feed", "relay.fm"),
+            feed("https://feeds.fireside.fm/mrc/rss", "mrc.fireside.fm"),
+            feed("https://feeds.devchat.tv/all-shows-devchat.rss", "devchat.tv"),
+            feed("https://atomicbirdhouse.com/index.xml", "atomicbirdhouse.com"),
+            feed("https://albertodebortoli.com/rss", "albertodebortoli.com"),
+            feed("http://augmentedcode.io/feed", "augmentedcode.io"),
+            feed("https://benoitpasquier.com/index.xml", "benoitpasquier.com"),
+            feed("https://www.fabisevi.ch/feed/", "fabisevi.ch"),
+            feed("https://mobileally.co/index.xml", "mobileally.co"),
+            feed("https://irakpavel.tech/feed.xml", "irakpavel.tech"),
+            feed("https://tyler.io/feed/", "tyler.io")
+        ));
+        map.put("movies", List.of(
+            feed("https://www.reddit.com/r/movies/.rss", "reddit.com"),
+            feed("https://deadline.com/feed/", "deadline.com"),
+            feed("https://variety.com/feed/", "variety.com"),
+            feed("https://www.indiewire.com/feed/", "indiewire.com"),
+            feed("http://feeds.feedburner.com/slashfilm", "slashfilm.com"),
+            feed("https://www.comingsoon.net/feed", "comingsoon.net"),
+            feed("https://www.firstshowing.net/feed/", "firstshowing.net"),
+            feed("https://www.avclub.com/rss", "avclub.com"),
+            feed("https://filmschoolrejects.com/feed/", "filmschoolrejects.com"),
+            feed("https://www.bleedingcool.com/movies/feed/", "bleedingcool.com"),
+            feed("https://www.aintitcool.com/node/feed/", "aintitcool.com")
+        ));
+        map.put("music", List.of(
+            feed("https://www.billboard.com/articles/rss.xml", "billboard.com"),
+            feed("http://pitchfork.com/rss/news", "pitchfork.com"),
+            feed("http://consequenceofsound.net/feed", "consequence.net"),
+            feed("https://www.musicbusinessworldwide.com/feed/", "musicbusinessworldwide.com"),
+            feed("http://songexploder.net/feed", "songexploder.net"),
+            feed("https://edm.com/rss/feed", "edm.com"),
+            feed("https://www.youredm.com/feed", "youredm.com"),
+            feed("http://feeds.feedburner.com/metalinjection", "metalinjection.net")
+        ));
+        map.put("news", List.of(
+            feed("http://feeds.bbci.co.uk/news/world/rss.xml", "bbc.co.uk"),
+            feed("http://rss.cnn.com/rss/edition_world.rss", "cnn.com"),
+            feed("https://rss.nytimes.com/services/xml/rss/nyt/World.xml", "nytimes.com"),
+            feed("https://www.theguardian.com/world/rss", "theguardian.com"),
+            feed("http://feeds.washingtonpost.com/rss/world", "washingtonpost.com"),
+            feed("https://www.reddit.com/r/worldnews/.rss", "reddit.com"),
+            feed("https://www.cnbc.com/id/100727362/device/rss/rss.html", "cnbc.com"),
+            feed("https://www.yahoo.com/news/rss", "yahoo.com"),
+            feed("https://news.google.com/news", "news.google.com"),
+            feed("https://timesofindia.indiatimes.com/rssfeeds/296589292.cms", "timesofindia.indiatimes.com"),
+            feed("http://feeds.feedburner.com/ndtvnews-world-news", "ndtv.com")
+        ));
+        map.put("personal_finance", List.of(
+            feed("https://www.reddit.com/r/personalfinance/.rss", "reddit.com"),
+            feed("https://www.nerdwallet.com/blog/feed/", "nerdwallet.com"),
+            feed("https://blog.mint.com/feed/", "mint.intuit.com"),
+            feed("https://www.thepennyhoarder.com/feed/", "thepennyhoarder.com"),
+            feed("https://www.moneycrashers.com/feed/", "moneycrashers.com"),
+            feed("https://www.iwillteachyoutoberich.com/feed/", "iwillteachyoutoberich.com"),
+            feed("https://www.makingsenseofcents.com/feed/", "makingsenseofcents.com"),
+            feed("https://www.financialsamurai.com/feed/", "financialsamurai.com"),
+            feed("https://millennialmoney.com/feed/", "millennialmoney.com"),
+            feed("https://www.getrichslowly.org/feed/", "getrichslowly.org"),
+            feed("https://affordanything.com/feed/", "affordanything.com"),
+            feed("https://www.goodfinancialcents.com/feed/", "goodfinancialcents.com"),
+            feed("https://www.sidehustlenation.com/feed/", "sidehustlenation.com"),
+            feed("http://www.moneyunder30.com/feed", "moneyunder30.com"),
+            feed("https://www.doughroller.net/feed/", "doughroller.net"),
+            feed("http://feeds.feedburner.com/wisebread", "wisebread.com"),
+            feed("https://thecollegeinvestor.com/feed/", "cdn.thecollegeinvestor.com"),
+            feed("https://studentloanhero.com/blog/feed/", "studentloanhero.com"),
+            feed("http://feeds.feedburner.com/budgetsaresexy", "budgetsaresexy.com"),
+            feed("http://feeds.feedburner.com/Frugalwoods", "frugalwoods.com"),
+            feed("https://moneysavingmom.com/feed", "moneysavingmom.com"),
+            feed("http://feeds.feedburner.com/MoneyNing", "moneyning.com"),
+            feed("https://mywifequitherjob.com/feed/", "mywifequitherjob.com"),
+            feed("http://feeds.feedblitz.com/kitciesnerdseyeview&x=1", "kitces.com"),
+            feed("https://obliviousinvestor.com/feed/", "obliviousinvestor.com"),
+            feed("https://www.savingadvice.com/feed/", "savingadvice.com"),
+            feed("https://www.learntotradethemarket.com/feed/", "learntotradethemarket.com"),
+            feed("https://wellkeptwallet.com/feed/", "wellkeptwallet.com")
+        ));
+        map.put("photography", List.of(
+            feed("https://iso.500px.com/feed/", "iso.500px.com"),
+            feed("https://500px.com/editors.rss", "500px.com"),
+            feed("https://petapixel.com/feed/", "petapixel.com"),
+            feed("https://feeds.feedburner.com/DigitalPhotographySchool", "digital-photography-school.com"),
+            feed("https://www.lightstalking.com/feed/", "lightstalking.com"),
+            feed("https://lightroomkillertips.com/feed/", "lightroomkillertips.com"),
+            feed("https://www.canonrumors.com/feed/", "canonrumors.com"),
+            feed("https://stuckincustoms.com/feed/", "stuckincustoms.com"),
+            feed("https://feeds.feedburner.com/TheSartorialist", "thesartorialist.com"),
+            feed("https://www.bostonglobe.com/rss/bigpicture", "bostonglobe.com"),
+            feed("http://feeds.feedburner.com/OneBigPhoto", "onebigphoto.com"),
+            feed("http://feeds.feedburner.com/blogspot/WOBq", "strobist.blogspot.com")
+        ));
+        map.put("science", List.of(
+            feed("https://www.reddit.com/r/science/.rss", "reddit.com"),
+            feed("https://www.nature.com/nature.rss", "feeds.nature.com"),
+            feed("https://rss.sciam.com/ScientificAmericanGlobal", "scientificamerican.com"),
+            feed("http://feeds.sciam.com/sciam/60secsciencepodcast", "scientificamerican.com"),
+            feed("http://feeds.bbc.co.uk/news/science_and_environment/rss.xml", "bbc.co.uk"),
+            feed("https://rss.nytimes.com/services/xml/rss/nyt/Science.xml", "nytimes.com"),
+            feed("https://www.sciencedaily.com/rss/all.xml", "sciencedaily.com"),
+            feed("https://phys.org/rss-feed/", "phys.org"),
+            feed("https://www.wired.com/feed/category/science/latest/rss", "wired.com"),
+            feed("https://gizmodo.com/tag/science/rss", "gizmodo.com"),
+            feed("https://feeds.npr.org/510307/podcast.xml", "npr.org"),
+            feed("https://feeds.npr.org/510306/podcast.xml", "hiddenbrain.org"),
+            feed("http://feeds.wnyc.org/radiolab", "wnycstudios.org"),
+            feed("https://www.ted.com/feeds/talks.rss", "ted.com"),
+            feed("https://feeds.gimletmedia.com/sciencevs", "gimletmedia.com"),
+            feed("https://feeds.simplecast.com/Ly11F_52", "sawbones.simplecast.com"),
+            feed("https://omnystudio.com/d/playlist/a537e28a-af51-495e-afcc-a7600146022b/2a105077-1014-41d2-831f-ab190186b4d5/podcast.rss", "gastropod.com"),
+            feed("https://sciencebasedmedicine.org/feed/", "sciencebasedmedicine.org"),
+            feed("https://flowingdata.com/feed", "flowingdata.com"),
+            feed("https://probablyscience.libsyn.com/rss", "probablyscience.com"),
+            feed("http://podcasts.files.bbci.co.uk/p02w57nt", "bbc.co.uk"),
+            feed("http://podcasts.files.bbci.co.uk/b00snr0g.rss", "bbc.co.uk"),
+            feed("http://shirtloadsofscience.libsyn.com/rss", "shirtloadsofscience.libsyn.com"),
+            feed("http://www.twis.org/feed/", "twis.org")
+        ));
+        map.put("space", List.of(
+            feed("https://www.nasa.gov/rss/dyn/breaking_news.rss", "nasa.gov"),
+            feed("https://www.reddit.com/r/space/.rss?format=xml", "reddit.com"),
+            feed("https://www.youtube.com/feeds/videos.xml?user=spacexchannel", "youtube.com"),
+            feed("http://www.space.com/feeds/all", "space.com"),
+            feed("https://www.skyandtelescope.com/feed", "skyandtelescope.org"),
+            feed("https://www.newscientist.com/subject/space/feed", "newscientist.com"),
+            feed("https://www.theguardian.com/science/space/rss", "theguardian.com")
+        ));
+        map.put("sports", List.of(
+            feed("http://feeds.bbc.co.uk/sport/rss.xml", "bbc.co.uk"),
+            feed("https://www.reddit.com/r/sports/.rss", "reddit.com"),
+            feed("https://www.espn.com/espn/rss/news", "espn.com"),
+            feed("https://sports.yahoo.com/rss", "sports.yahoo.com"),
+            feed("http://feeds.skynews.com/feeds/xml/sports.xml", "skynews.com"),
+            feed("https://www.sportskeeda.com/feed", "sportskeeda.com")
+        ));
+        map.put("startups", List.of(
+            feed("https://hnrss.org/frontpage", "news.ycombinator.com"),
+            feed("http://www.aaronsw.com/2002/feeds/pgessays.rss", "paulgraham.com"),
+            feed("https://www.producthunt.com/feed", "producthunt.com"),
+            feed("https://feeds.feedburner.com/venturebeat/SZYF", "venturebeat.com"),
+            feed("https://www.forbes.com/entrepreneurs/feed/", "forbes.com"),
+            feed("https://www.inc.com/rss/", "inc.com"),
+            feed("http://feeds.feedburner.com/entrepreneur/latest", "entrepreneur.com"),
+            feed("https://avc.com/feed/", "avc.com"),
+            feed("https://bothsidesofthetable.com/feed", "bothsidesofthetable.com"),
+            feed("https://feld.com/feed", "feld.com"),
+            feed("https://feld.com/archives/tag/blog/feed", "feld.com"),
+            feed("https://steveblank.com/feed/", "steveblank.com"),
+            feed("https://www.intercom.com/blog/feed", "intercom.com"),
+            feed("https://rss.art19.com/masters-of-scale", "mastersofscale.com"),
+            feed("https://rss.art19.com/tim-ferriss-show", "tim.blog"),
+            feed("http://feeds.feedburner.com/twistvid", "thisweekinstartups.com"),
+            feed("https://feeds.feedburner.com/SmallBusinessTrends", "smallbiztrends.com"),
+            feed("http://feeds.feedburner.com/smartpassiveincome", "smartpassiveincome.com"),
+            feed("https://www.springwise.com/feed", "springwise.com"),
+            feed("https://startupjunkie.libsyn.com/rss", "startupjunkie.org"),
+            feed("https://www.quicksprout.com/rss", "quicksprout.com"),
+            feed("https://www.youtube.com/feeds/sdeus.xmlthmer-spacexchannel", "youtube.com"),
+            feed("https://www.youtube.com/feeds/videos.xml?channel_id=UCSLXy31l220sdDeeAX5JpPw4", "youtube.com")
+        ));
+        map.put("tech", List.of(
+            feed("https://news.ycombinator.com/rss", "news.ycombinator.com"),
+            feed("https://www.theverge.com/rss/index.xml", "theverge.com"),
+            feed("http://feeds.feedburner.com/TechCrunch", "techcrunch.com"),
+            feed("http://feeds.arstechnica.com/arstechnica/index", "arstechnica.com"),
+            feed("https://www.engadget.com/rss.xml", "engadget.com"),
+            feed("https://www.cnet.com/rss/news/", "cnet.com"),
+            feed("https://gizmodo.com/rss", "gizmodo.com"),
+            feed("http://rss.slashdot.org/Slashdot/slashdotMain", "slashdot.org"),
+            feed("https://lifehacker.com/rss", "lifehacker.com"),
+            feed("http://feeds.mashable.com/Mashable", "mashable.com"),
+            feed("https://www.blog.google/rss/", "blog.google"),
+            feed("https://thenextweb.com/feed/", "thenextweb.com"),
+            feed("https://readwrite.com/feed/", "readwrite.com"),
+            feed("http://stratechery.com/feed?", "stratechery.com"),
+            feed("https://feeds.twit.tv/twit.xml", "twit.tv"),
+            feed("https://feeds.megaphone.fm/vergecast", "theverge.com"),
+            feed("https://feeds.megaphone.fm/replyall", "gimletmedia.com"),
+            feed("https://atp.fm/rss", "atp.fm"),
+            feed("https://www.relay.fm/analogue/feed", "relay.fm"),
+            feed("https://www.relay.fm/clockwise/feed", "relay.fm"),
+            feed("https://www.relay.fm/rocket/feed", "relay.fm"),
+            feed("https://www.youtube.com/feeds/videos.xml?user=GaryVaynerchuk", "youtube.com"),
+            feed("https://www.youtube.com/feeds/videos.xml?user=marieforleo", "youtube.com"),
+            feed("https://www.youtube.com/feeds/videos.xml?channel_id=UCSLXy31l220sdDeeAX5JpPw7", "youtube.com"),
+            feed("https://www.youtube.com/feeds/videos.xml?channel_id=UCSLXy31l220sdDeeAX5JpPw8", "youtube.com"),
+            feed("https://www.youtube.com/feeds/videos.xml?channel_id=UCSLXy31l220sdDeeAX5JpPw9", "youtube.com")
+        ));
+        map.put("television", List.of(
+            feed("https://www.reddit.com/r/television/.rss", "reddit.com"),
+            feed("https://tv.avclub.com/rss", "avclub.com"),
+            feed("https://tvline.com/feed/", "tvline.com"),
+            feed("https://www.tvfanatic.com/rss.xml", "tvfanatic.com"),
+            feed("https://www.bleedingcool.com/tv/feed/", "bleedingcool.com"),
+            feed("http://feeds.feedburner.com/thetvaddict/AXob", "thetvaddict.com")
+        ));
+        map.put("tennis", List.of(
+            feed("http://feeds.bbc.co.uk/sport/tennis/rss.xml", "bbc.co.uk"),
+            feed("https://www.atptour.com/en/media/rss-feed/xml-feed", "atptour.com"),
+            feed("https://www.espn.com/espn/rss/tennis/news", "espn.com"),
+            feed("https://www.reddit.com/r/tennis/.rss", "reddit.com"),
+            feed("https://feed.podbean.com/essentialtennis/feed.xml", "essentialtennis.podbean.com"),
+            feed("https://www.perfect-tennis.com/feed/", "perfect-tennis.com"),
+            feed("http://www.grandslamfantasytennis.com/feed/?x=1", "grandslamfantasytennis.com")
+        ));
+        map.put("travel", List.of(
+            feed("https://rss.nytimes.com/services/xml/rss/nyt/Travel.xml", "nytimes.com"),
+            feed("https://www.theguardian.com/uk/travel/rss", "theguardian.com"),
+            feed("https://www.lonelyplanet.com/news/feed/atom/", "lonelyplanet.com"),
+            feed("https://www.atlasobscura.com/feeds/latest", "atlasobscura.com"),
+            feed("https://www.nomadicmatt.com/travel-blog/feed/", "nomadicmatt.com"),
+            feed("https://www.livelifetravel.world/feed/", "livelifetravel.world")
+        ));
+        map.put("ui_ux", List.of(
+            feed("https://www.smashingmagazine.com/feed", "smashingmagazine.com"),
+            feed("https://www.reddit.com/r/userexperience/.rss", "reddit.com"),
+            feed("https://uxdesign.cc/feed", "uxdesign.cc"),
+            feed("https://www.nngroup.com/feed/rss/", "nngroup.com"),
+            feed("https://www.invisionapp.com/inside-design/feed", "invisionapp.com"),
+            feed("https://www.designernews.co/?format=rss", "designernews.co"),
+            feed("https://uxstudioteam.com/ux-blog/feed/", "uxstudioteam.com"),
+            feed("https://uxmovement.com/feed/", "uxmovement.com"),
+            feed("https://usabilitygeek.com/feed/", "usabilitygeek.com"),
+            feed("https://feeds.feedburner.com/JustCreativeDesignBlog", "justcreative.com"),
+            feed("http://boxesandarrows.com/rss/", "boxesandarrows.com")
+        ));
+        map.put("web_development", List.of(
+            feed("https://css-tricks.com/feed/", "css-tricks.com"),
+            feed("https://alistapart.com/main/feed/", "alistapart.com"),
+            feed("https://hacks.mozilla.org/feed/", "hacks.mozilla.org"),
+            feed("https://developers.google.com/web/updates/rss.xml", "developers.google.com"),
+            feed("https://davidwalsh.name/feed", "davidwalsh.name"),
+            feed("https://www.codewall.co.uk/feed/", "codewall.co.uk"),
+            feed("https://gosink.in/rss/", "gosink.in")
+        ));
+        return Collections.unmodifiableMap(map);
+    }
+}

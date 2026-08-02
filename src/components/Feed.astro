@@ -2,7 +2,7 @@
 // Feed component: renders a single domain's list of feed items.
 // Props:
 // - `domain`: string identifier for the feed (used as heading and anchor id).
-// - `feed`: array of feed items as returned by `rss-parser`.
+// - `feed`: array of feed items as returned by the backend API.
 import { shortTimeAgo } from "../utils/time";
 
 const { domain, feed } = Astro.props;
@@ -20,7 +20,7 @@ const { domain, feed } = Astro.props;
         <li class="prose ">
           <>
             <a href={item.link}>{item.title}</a>
-            <span>[{shortTimeAgo(item.pubDate)}]</span>
+            {item.pubDate && <span>[{shortTimeAgo(item.pubDate)}]</span>}
           </>
         </li>
       ))

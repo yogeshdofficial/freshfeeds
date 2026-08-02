@@ -1,9 +1,8 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import { categorizedFeeds } from "../constants/categorizedFeeds";
+import { getCategories } from "../utils/api";
 
-// Front page: a simple index that links to available categories.
-// Each card shows the category name, number of feeds, and a few sample domains.
+const categories = await getCategories();
 ---
 
 <Layout>
@@ -16,34 +15,36 @@ import { categorizedFeeds } from "../constants/categorizedFeeds";
   </header>
 
   <section class="mt-6">
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-      {
-        Object.keys(categorizedFeeds).map((category: string) => {
-          const feeds =
-            categorizedFeeds[category as keyof typeof categorizedFeeds];
-          const sample = feeds
-            .slice(0, 3)
-            .map((f) => f.domain)
-            .join(", ");
-          return (
-            <a href={`/${category}`} class="category-card card">
-              <div class="flex items-center justify-between">
-                <div>
-                  <h3 class="title text-lg capitalize">
-                    {category.replace(/_/g, " ")}
-                  </h3>
-                  <p class="text-sm">{feeds.length} feeds</p>
-                </div>
-                <div class="text-sm small-muted">↗</div>
-              </div>
-              <p class="mt-2 text-sm text-base-content opacity-80">{sample}</p>
-            </a>
-          );
-        })
-      }
-    </div>
+    {
+      categories?.length ? (
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {
+            categories.map((category) => {
+              return (
+                <a href={`/${category.name}`} class="category-card card">
+                  <div class="flex items-center justify-between">
+                    <div>
+                      <h3 class="title text-lg capitalize">
+                        {category.name.replace(/_/g, " ")}
+                      </h3>
+                      <p class="text-sm">{category.feedCount} feeds</p>
+                    </div>
+                    <div class="text-sm small-muted">↗</div>
+                  </div>
+                  <p class="mt-2 text-sm text-base-content opacity-80">
+                    {category.sampleDomains.join(", ")}
+                  </p>
+                </a>
+              );
+            })
+          }
+        </div>
+      ) : (
+        <p class="text-center text-sm opacity-70">
+          Unable to load categories. Make sure the backend is running and
+          PUBLIC_API_URL points to it.
+        </p>
+      )
+    }
   </section>
 </Layout>
-
-); }) }
-

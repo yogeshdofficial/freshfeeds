@@ -1,72 +1,79 @@
-https://freshfeeds.netlify.app
-
-# Astro Starter Kit: Basics
-
-```sh
-pnpm create astro@latest -- --template basics
-```
-
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
-
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
-
-````text
-/
-├── public/
-│   └── favicon.svg
-├── src
-│   ├── assets
-│   │   └── astro.svg
 # FreshFeeds (rssence)
 
-A lightweight RSS/Atom reader built with Astro. FreshFeeds aggregates feeds by category and presents a simple, fast interface for browsing the latest items from many sources.
+https://freshfeeds.netlify.app
 
-## Features
+A lightweight RSS/Atom reader. A **Spring Boot** backend aggregates ~526 feeds across
+34 categories; an **Astro** frontend renders them by category.
 
-- Category-based collection of RSS/Atom feeds
-- Simple UI components for navigation, feed lists and theme switching
-- Uses `rss-parser` to fetch and parse feeds server-side
+## Architecture
 
-## Quickstart
+- `freshfeeds-backend/` — Spring Boot 4 (Java, GraalVM native-ready) REST API:
+  - `GET /api/categories` — category list (name, feed count, sample domains)
+  - `GET /api/categories/{category}` — feed items grouped by domain, newest first
+  - Fetching/parsing lives in the backend (`FeedService` + `FeedParser`, JDK
+    `HttpClient` + DOM parser), so no runtime reflection is needed for native images.
+  - Feed registry: `CategorizedFeeds.java` (generated from the original
+    `categorizedFeeds.ts` data).
+- `src/` — Astro frontend. Pages fetch from the backend at build time using the
+  `PUBLIC_API_URL` environment variable (`src/constants/api.ts`, `src/utils/api.ts`).
 
-Prerequisites:
-- Node.js (recommended v18+)
-- `pnpm` (project expects pnpm package manager)
+## Local development
 
-Install dependencies:
+Backend (http://localhost:8080):
+
+```bash
+cd freshfeeds-backend
+./mvnw spring-boot:run
+```
+
+Frontend (http://localhost:4321):
 
 ```bash
 pnpm install
-````
-
-Run the development server:
-
-```bash
 pnpm dev
 ```
 
-Build for production:
+The frontend defaults to `http://localhost:8080/api` when `PUBLIC_API_URL` is unset.
+
+## Deployment
+
+### Backend → Render (GraalVM native)
+
+1. Push this repo to GitHub (repo: `yogeshdofficial/freshfeeds`).
+2. On [Render](https://dashboard.render.com): **New → Blueprint**, select the repo.
+   Render reads `render.yaml` and deploys `freshfeeds-backend` using the
+   multi-stage `Dockerfile` (GraalVM native build → tiny distroless image, binds to
+   `$PORT`).
+3. Note the service URL, e.g. `https://freshfeeds-backend.onrender.com`.
+
+Local container build (optional):
 
 ```bash
-pnpm build
-pnpm preview
+cd freshfeeds-backend
+docker build -t freshfeeds-backend .
+docker run -p 8080:8080 freshfeeds-backend
 ```
 
-## Project Structure
+### Frontend → Netlify
 
-- `src/components` — Astro components (Header, Sidebar, Feed, DomainChooser)
-- `src/constants` — Data like `categorizedFeeds.ts` and available `themes`
-- `src/utils` — Helper utilities (`rss.ts`, `time.ts`)
-- `src/pages` — Astro pages and routing
+1. In Netlify: **Add new site → Import from Git** and pick this repo (already done
+   for `freshfeeds.netlify.app`).
+2. Set the environment variable **`PUBLIC_API_URL`** to your backend URL + `/api`,
+   e.g. `https://freshfeeds-backend.onrender.com/api`
+   (Site settings → Environment variables). Build command `pnpm build`, publish
+   dir `dist` (also in `netlify.toml`).
+3. Push to `master` — Netlify builds and deploys. Content is baked at build time,
+   so redeploy (or use the dashboard's "Clear cache and deploy") to refresh feeds.
 
-## Development Notes
+> The frontend build fetches from the backend, so deploy the backend first, then
+> redeploy the frontend once the backend URL is set.
 
-- Feeds are defined in `src/constants/categorizedFeeds.ts`. Add or remove feed URLs there.
-- Feed fetching is handled by `src/utils/rss.ts` which uses `rss-parser`.
-- Short relative times are provided by `src/utils/time.ts`.
-- Theme selection is stored in `localStorage` under the key `theme` and applied to `document.documentElement`.
+## Development notes
+
+- Add/remove feeds by editing `CategorizedFeeds.java` in the backend.
+- The backend fetches all feeds for a category concurrently (virtual threads) and
+  sorts by publication date; unparseable dates sort last.
+- Theme selection is stored in `localStorage` under `theme`.
 
 ## Contributing
 
@@ -75,11 +82,5 @@ pnpm preview
 
 ## License
 
-This repository does not include a license file. If you maintain the project, add a `LICENSE` to indicate the project's license (e.g. MIT).
-
----
-
-If you'd like, I can:
-
-- Add a `LICENSE` (MIT) and update `package.json`.
-- Run a formatting pass (Prettier/ESLint) and fix remaining TypeScript warnings.
+This repository does not include a license file. If you maintain the project, add
+a `LICENSE` to indicate the project's license (e.g. MIT).

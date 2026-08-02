@@ -1,52 +1,41 @@
 ---
 import type { GetStaticPaths } from "astro";
-import { categorizedFeeds } from "../constants/categorizedFeeds";
-import { getFeedFromUrl } from "../utils/rss";
 import Layout from "../layouts/Layout.astro";
 import Feed from "../components/Feed.astro";
 import DomainChooser from "../components/DomainChooser.astro";
-export const getStaticPaths = (() => {
-  return Object.keys(categorizedFeeds).map((category) => {
-    return {
-      params: { category },
-    };
+import { getCategories, getCategoryFeeds } from "../utils/api";
+
+export const getStaticPaths = (async () => {
+  const categories = await getCategories();
+  if (!categories) {
+    console.error("Backend API unreachable - cannot prerender category pages.");
+    return [];
+  }
+  return categories.map((category) => {
+    return { params: { category: category.name } };
   });
 }) satisfies GetStaticPaths;
 
 const { category }: { category: string } = Astro.params;
 
-const feedsPromise = categorizedFeeds[
-  category as keyof typeof categorizedFeeds
-].map((feed) => {
-  return getFeedFromUrl(feed.url);
-});
-
-const feeds = await Promise.all(feedsPromise);
-
-feeds.forEach((feed) => {
-  feed.sort(
-    (a, b) => new Date(b.pubDate).getTime() - new Date(a.pubDate).getTime()
-  );
-});
-
-const feedsWithDomain = Object.fromEntries(
-  feeds.map((feed, i) => {
-    return [
-      categorizedFeeds[category as keyof typeof categorizedFeeds][i].domain,
-      feed,
-    ];
-  })
-);
+const data = await getCategoryFeeds(category);
+const domains = data ? Object.keys(data.feeds) : [];
 ---
 
 <Layout>
   <div class="flex flex-col gap-3 items-center min-w-0">
-    <DomainChooser domains={Object.keys(feedsWithDomain)} />
+    <DomainChooser domains={domains} />
     {
-      Object.keys(feedsWithDomain).map((domain) => {
-        return <Feed domain={domain} feed={feedsWithDomain[domain]} />;
-      })
+      data
+        ? domains.map((domain) => {
+            return <Feed domain={domain} feed={data.feeds[domain]} />;
+          })
+        : (
+            <p class="text-sm opacity-70">
+              Unable to load feeds for {category}. Make sure the backend is
+              running and PUBLIC_API_URL points to it.
+            </p>
+          )
     }
   </div>
-  <!-- <div>{JSON.stringify(feedsWithDomain)}</div> -->
 </Layout>

@@ -1,0 +1,10 @@
+target
+.git
+.gitignore
+.gitattributes
+HELP.md
+*.log
+.idea
+.vscode
+Dockerfile
+.dockerignore

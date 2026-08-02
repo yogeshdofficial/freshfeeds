@@ -1,0 +1,7 @@
+[build]
+  command = "pnpm build"
+  publish = "dist"
+
+# PUBLIC_API_URL is read at build time by the frontend (src/constants/api.ts).
+# Set it in the Netlify dashboard: Site settings > Environment variables.
+# Example value: https://freshfeeds-backend.onrender.com/api

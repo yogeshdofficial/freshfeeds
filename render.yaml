@@ -1,0 +1,14 @@
+# Render Blueprint for the FreshFeeds Spring Boot backend.
+# Deploy on Render with: New > Blueprint, then point at this repo.
+# Render sets PORT=10000; the app binds to it via server.port=${PORT:8080}.
+services:
+  - type: web
+    name: freshfeeds-backend
+    runtime: docker
+    repo: https://github.com/yogeshdofficial/freshfeeds
+    branch: master
+    dockerContext: ./freshfeeds-backend
+    dockerfilePath: ./freshfeeds-backend/Dockerfile
+    plan: free
+    autoDeploy: true
+    healthCheckPath: /api/categories

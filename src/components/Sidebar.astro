@@ -1,15 +1,14 @@
 ---
 // Sidebar component: displays the list of categories.
-// - `categorizedFeeds` provides the available categories and feeds.
-// - `Astro.params.category` can be used to highlight the active category (not currently applied).
-import { categorizedFeeds } from "../constants/categorizedFeeds";
-const { category } = Astro.params;
+// Categories are fetched from the backend API at build time.
+import { getCategories } from "../utils/api";
+const categories = (await getCategories()) ?? [];
 ---
 
 <div class="drawer-side">
   <label for="my-drawer" class="drawer-overlay"></label>
   <div class="p-4 w-80 min-h-full bg-base-200 text-base-content flex flex-col">
-    <!-- 🔴 Close Button (Top Right Corner) -->
+    <!-- Close Button (Top Right Corner) -->
     <div class="flex justify-end">
       <label for="my-drawer" class="btn btn-sm btn-circle btn-ghost">
         ❌
@@ -19,10 +18,10 @@ const { category } = Astro.params;
     <!-- Menu Items -->
     <ul class="menu mt-4">
       {
-        Object.keys(categorizedFeeds).map((category) => {
+        categories.map((category) => {
           return (
             <li>
-              <a href={"/" + category}>{category}</a>
+              <a href={"/" + category.name}>{category.name}</a>
             </li>
           );
         })
