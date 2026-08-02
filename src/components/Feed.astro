@@ -14,10 +14,14 @@ const { domain, feed } = Astro.props;
   >
     {domain}
   </h2>
-  <ul class="list-disc list-inside">
+  <ul class="list-disc list-inside" data-feed-list>
     {
-      feed.slice(0, 10).map((item: any) => (
-        <li class="prose ">
+      feed.map((item: any, index: number) => (
+        <li
+          class="prose"
+          data-feed-item={index}
+          hidden={index >= 10}
+        >
           <>
             <a href={item.link}>{item.title}</a>
             {item.pubDate && <span>[{shortTimeAgo(item.pubDate)}]</span>}

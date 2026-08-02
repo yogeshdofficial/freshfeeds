@@ -25,6 +25,18 @@ const domains = data ? Object.keys(data.feeds) : [];
 <Layout>
   <div class="flex flex-col gap-3 items-center min-w-0">
     <DomainChooser domains={domains} />
+    <label class="flex items-center gap-2 text-sm opacity-80">
+      Items per domain
+      <input
+        id="quantity-input"
+        type="number"
+        min="0"
+        max="100"
+        step="1"
+        value="10"
+        class="input input-sm input-bordered w-20 text-center"
+      />
+    </label>
     {
       data
         ? domains.map((domain) => {
@@ -39,3 +51,23 @@ const domains = data ? Object.keys(data.feeds) : [];
     }
   </div>
 </Layout>
+
+<script>
+  const input = document.getElementById(
+    "quantity-input"
+  ) as HTMLInputElement | null;
+  const lists = document.querySelectorAll<HTMLUListElement>("[data-feed-list]");
+
+  function applyQuantity() {
+    const raw = parseInt(input?.value ?? "10", 10);
+    const qty = Number.isNaN(raw) ? 10 : Math.max(0, Math.min(100, raw));
+    lists.forEach((list) => {
+      list.querySelectorAll<HTMLLIElement>("[data-feed-item]").forEach((item) => {
+        const idx = Number(item.dataset.feedItem);
+        item.hidden = idx >= qty;
+      });
+    });
+  }
+
+  input?.addEventListener("input", applyQuantity);
+</script>
