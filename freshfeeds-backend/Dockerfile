@@ -1,14 +1,14 @@
 # syntax=docker/dockerfile:1
 
-# ---- Build stage: compile a GraalVM native executable ----
-FROM ghcr.io/graalvm/native-image-community:25 AS build
+# ---- Build stage: compile a regular JVM jar ----
+FROM eclipse-temurin:25-jdk AS build
 WORKDIR /app
 COPY . .
-RUN sh ./mvnw -Pnative -DskipTests native:compile
+RUN sh ./mvnw -DskipTests package
 
-# ---- Runtime stage: minimal image with just the native binary ----
-FROM gcr.io/distroless/base-debian12:nonroot
-COPY --from=build /app/target/freshfeeds-backend /app
+# ---- Runtime stage: JRE image with the jar ----
+FROM eclipse-temurin:25-jre
+WORKDIR /app
+COPY --from=build /app/target/freshfeeds-backend-0.0.1-SNAPSHOT.jar app.jar
 EXPOSE 8080
-USER nonroot
-ENTRYPOINT ["/app"]
+ENTRYPOINT ["java", "-jar", "app.jar"]

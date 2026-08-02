@@ -7,11 +7,11 @@ A lightweight RSS/Atom reader. A **Spring Boot** backend aggregates ~526 feeds a
 
 ## Architecture
 
-- `freshfeeds-backend/` — Spring Boot 4 (Java, GraalVM native-ready) REST API:
+- `freshfeeds-backend/` — Spring Boot 4 (Java) REST API:
   - `GET /api/categories` — category list (name, feed count, sample domains)
   - `GET /api/categories/{category}` — feed items grouped by domain, newest first
   - Fetching/parsing lives in the backend (`FeedService` + `FeedParser`, JDK
-    `HttpClient` + DOM parser), so no runtime reflection is needed for native images.
+    `HttpClient` + DOM parser).
   - Feed registry: `CategorizedFeeds.java` (generated from the original
     `categorizedFeeds.ts` data).
 - `src/` — Astro frontend. Pages fetch from the backend at build time using the
@@ -37,13 +37,12 @@ The frontend defaults to `http://localhost:8080/api` when `PUBLIC_API_URL` is un
 
 ## Deployment
 
-### Backend → Render (GraalVM native)
+### Backend → Render (regular JVM)
 
 1. Push this repo to GitHub (repo: `yogeshdofficial/freshfeeds`).
 2. On [Render](https://dashboard.render.com): **New → Blueprint**, select the repo.
    Render reads `render.yaml` and deploys `freshfeeds-backend` using the
-   multi-stage `Dockerfile` (GraalVM native build → tiny distroless image, binds to
-   `$PORT`).
+   multi-stage `Dockerfile` (JDK build → JRE image, binds to `$PORT`).
 3. Note the service URL, e.g. `https://freshfeeds-backend.onrender.com`.
 
 Local container build (optional):

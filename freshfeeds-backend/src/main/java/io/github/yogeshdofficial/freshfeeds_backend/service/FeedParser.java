@@ -25,8 +25,7 @@ import java.util.Locale;
 /**
  * Parses RSS (2.0 / 1.0) and Atom feeds into a flat list of items.
  *
- * <p>Uses the JDK's built-in DOM parser instead of a third-party library so that
- * no runtime reflection is required, keeping the GraalVM native image build simple.
+ * <p>Uses the JDK's built-in DOM parser instead of a third-party library.
  */
 @Component
 public class FeedParser {
