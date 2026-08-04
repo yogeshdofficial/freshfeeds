@@ -1,5 +1,9 @@
 HELP.md
 target/
+*.db
+*.db-journal
+*.db-wal
+*.db-shm
 .mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/

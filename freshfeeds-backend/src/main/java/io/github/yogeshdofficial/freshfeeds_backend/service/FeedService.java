@@ -1,10 +1,13 @@
 package io.github.yogeshdofficial.freshfeeds_backend.service;
 
+import io.github.yogeshdofficial.freshfeeds_backend.cache.CachedFeeds;
+import io.github.yogeshdofficial.freshfeeds_backend.cache.FeedCacheService;
 import io.github.yogeshdofficial.freshfeeds_backend.model.FeedItem;
 import io.github.yogeshdofficial.freshfeeds_backend.model.FeedSource;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.net.URI;
@@ -12,6 +15,7 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.time.Duration;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.LinkedHashMap;
@@ -31,9 +35,16 @@ public class FeedService {
 
     private final HttpClient httpClient;
     private final FeedParser feedParser;
+    private final FeedCacheService cache;
+    private final Duration cacheTtl;
 
-    public FeedService(FeedParser feedParser) {
+    public FeedService(
+            FeedParser feedParser,
+            FeedCacheService cache,
+            @Value("${app.cache.ttl:15m}") Duration cacheTtl) {
         this.feedParser = feedParser;
+        this.cache = cache;
+        this.cacheTtl = cacheTtl;
         this.httpClient =
                 HttpClient.newBuilder()
                         .connectTimeout(Duration.ofSeconds(10))
@@ -72,7 +83,7 @@ public class FeedService {
         try (ExecutorService executor = Executors.newVirtualThreadPerTaskExecutor()) {
             List<CompletableFuture<List<FeedItem>>> futures =
                     sources.stream()
-                            .map(source -> CompletableFuture.supplyAsync(() -> fetch(source), executor))
+                            .map(source -> CompletableFuture.supplyAsync(() -> load(source), executor))
                             .toList();
             for (int i = 0; i < sources.size(); i++) {
                 List<FeedItem> items = futures.get(i).join();
@@ -81,5 +92,23 @@ public class FeedService {
             }
         }
         return byDomain;
+    }
+
+    private List<FeedItem> load(FeedSource source) {
+        CachedFeeds cached = cache.find(source.url());
+        Instant now = Instant.now();
+        if (cached != null && !cached.fetchedAt().isBefore(now.minus(cacheTtl))) {
+            return cached.items();
+        }
+        List<FeedItem> fresh = fetch(source);
+        if (fresh.isEmpty()) {
+            if (cached != null) {
+                log.debug("Fetch failed for {}, serving stale cache", source.url());
+                return cached.items();
+            }
+            return new ArrayList<>();
+        }
+        cache.save(source.url(), source.domain(), fresh, now);
+        return fresh;
     }
 }

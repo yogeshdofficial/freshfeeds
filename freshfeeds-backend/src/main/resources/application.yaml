@@ -4,3 +4,20 @@ server:
 spring:
   application:
     name: freshfeeds-backend
+  datasource:
+    url: jdbc:sqlite:${FRESHFEEDS_DB_PATH:./freshfeeds.db}
+    driver-class-name: org.sqlite.JDBC
+    hikari:
+      maximum-pool-size: 1
+  sql:
+    init:
+      mode: always
+  jpa:
+    database-platform: org.hibernate.community.dialect.SQLiteDialect
+    hibernate:
+      ddl-auto: none
+    open-in-view: false
+
+app:
+  cache:
+    ttl: ${FRESHFEEDS_CACHE_TTL:15m}
